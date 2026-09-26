@@ -1,16 +1,24 @@
+# Weekly Research Update
 We spent this week researching real-world problems and shortlisted some project ideas for our multi-modal, multi-agent system. Below is each idea along with the background of the problem and how we'd solve it with multiple agents.
-1. Oversight for autonomous AI agents
-Background: AI agents are increasingly being trusted to act on our behalf — booking flights, spending money, writing and deploying code, even negotiating with other companies' agents. The problem is that as these agents chain together longer sequences of actions and interact with agents from other vendors, no single person or system is actually watching what they're doing in real time. If one agent makes a bad call, or two agents' actions conflict, there's currently no reliable way to catch it before damage is done.
-Our fix: Watchdog agents that monitor logs, screen activity, and transaction records across different agents, and flag or step in when something looks wrong.
-2. Multimodal evidence verification for courts
-Background: Courts are dealing with a growing flood of image, video, audio, and digital document evidence in every case, and judges and lawyers rarely have the time or technical expertise to manually verify all of it for authenticity and consistency. This creates real risk of manipulated or contradictory evidence going unnoticed.
-Our fix: Separate agents per evidence type, a cross-modal agent that checks whether the evidence is internally consistent (for example, does an audio timestamp match the video), and a report agent that summarizes confidence levels for lawyers and judges — decision support only, never a verdict.
-3. AI companion dependency
-Background: AI companion apps have gone from a niche product to something hundreds of millions of people use daily, including isolated elderly people and teenagers looking for emotional connection. Recent studies have started showing that heavy, long-term use can actually deepen loneliness rather than ease it, and some users show dependency and withdrawal-like reactions when access is cut off. There's currently no early-warning system that can catch this kind of unhealthy usage pattern before it becomes serious.
-Our fix: Agents that read sentiment, tone, and usage patterns, with a coordinator agent that gently nudges the user or alerts real support — without being paternalistic.
-4. Learned helplessness from AI tutors
-Background: As AI tutors and homework helpers become more common in classrooms, students increasingly ask them directly for answers instead of working through problems themselves. Over time this risks weakening independent thinking and problem-solving skills, but most current AI tutoring tools have no way to tell whether a student is genuinely learning or just copying answers.
-Our fix: One agent tracks how much of the work is genuinely the student's own, another checks whether they actually understand the material versus just extracting answers, and a coordinator decides when to give a hint versus when to back off so real learning happens.
-
-References:
+#### 1.Oversight for autonomous AI agents #### 
+##### Background: #####
+AI agents are increasingly being trusted to act on our behalf — booking flights, spending money, writing and deploying code, even negotiating with other companies' agents. The problem is that as these agents chain together longer sequences of actions and interact with agents from other vendors, no single person or system is actually watching what they're doing in real time. If one agent makes a bad call, or two agents' actions conflict, there's currently no reliable way to catch it before damage is done.
+##### Our fix: #####
+Watchdog agents that monitor logs, screen activity, and transaction records across different agents, and flag or step in when something looks wrong.
+#### 2.Multimodal evidence verification for courts ####
+##### Background: #####
+Courts are dealing with a growing flood of image, video, audio, and digital document evidence in every case, and judges and lawyers rarely have the time or technical expertise to manually verify all of it for authenticity and consistency. This creates real risk of manipulated or contradictory evidence going unnoticed.
+##### Our fix: #####
+Separate agents per evidence type, a cross-modal agent that checks whether the evidence is internally consistent (for example, does an audio timestamp match the video), and a report agent that summarizes confidence levels for lawyers and judges — decision support only, never a verdict.
+#### 3. AI companion dependency ####
+##### Background: #####
+AI companion apps have gone from a niche product to something hundreds of millions of people use daily, including isolated elderly people and teenagers looking for emotional connection. Recent studies have started showing that heavy, long-term use can actually deepen loneliness rather than ease it, and some users show dependency and withdrawal-like reactions when access is cut off. There's currently no early-warning system that can catch this kind of unhealthy usage pattern before it becomes serious.
+##### Our fix: #####
+Agents that read sentiment, tone, and usage patterns, with a coordinator agent that gently nudges the user or alerts real support — without being paternalistic.
+#### 4. Learned helplessness from AI tutors ####
+##### Background: #####
+As AI tutors and homework helpers become more common in classrooms, students increasingly ask them directly for answers instead of working through problems themselves. Over time this risks weakening independent thinking and problem-solving skills, but most current AI tutoring tools have no way to tell whether a student is genuinely learning or just copying answers.
+##### Our fix: ##### 
+One agent tracks how much of the work is genuinely the student's own, another checks whether they actually understand the material versus just extracting answers, and a coordinator decides when to give a hint versus when to back off so real learning happens.
+#### References: ####
 Along with our own discussion, we read a number of research papers on these topics and also gathered supporting content using AI tools like Claude, DeepSeek, and Gemini.
