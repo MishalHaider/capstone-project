@@ -41,3 +41,49 @@ General Desktop vs. Professional & Coding Workflows: Standard assistive software
 * The architectural deadlock and communication friction that occurs when multiple autonomous AI agents operating across different environments attempt to collaborate, delegate tasks, and resolve system conflicts without human intervention.
 * The lack of intelligent spatial-temporal coordination systems capable of fusing live CCTV camera feeds, GIS mapping data, and high-velocity sensor telemetry to dynamically manage autonomous multi-agent routing and logistics bottlenecks.
 * The absence of automated compliance and risk auditing mechanisms that can simultaneously inspect scanned structural blueprints, physical sensor outputs, and legal text documents to identify hazardous operational failures before they occur.
+
+
+
+# Meeting # 2 : Final Year Project (FYP) Idea Discussion
+
+**Date:** September 30th , 2026  
+**Participants:** Sir Farooq Javed(Supervisor),Team Members   
+**Status:** Idea Approved  
+
+---
+
+## 📌 Meeting Overview
+The primary objective of this meeting was to present and evaluate multiple Final Year Project (FYP) concept proposals with the supervisor. Various domain proposals were discussed, evaluated for feasibility, and narrowed down to a final approved direction.
+
+---
+
+## 💡 Key Ideas Discussed
+
+### 1. Habit Analyzer & Behavioral Predictor
+* **Concept:** Tracking user activities and habit patterns using ML models to analyze mental health challenges, stress, and addiction triggers.
+* **Feedback & Constraints:** Supervisor highlighted that habit profiling algorithms (e.g., social media reels algorithms) are already heavily researched and complex. Simply offering routine plans or basic tracking lacks a strong research/innovation scope for a senior project.
+
+### 2. Automated Job Aggregator & Portal
+* **Concept:** Scraping and fetching job postings from platforms like LinkedIn/Indeed, matching user resumes automatically, and enabling one-click applications.
+* **Feedback & Constraints:** High API costs and strict rate limits on platform APIs (like LinkedIn) pose serious execution bottlenecks. Building an independent platform from scratch also lacks immediate user traffic/traction.
+
+### 3. Evidence Verification System (Legal/Court System)
+* **Concept:** A multi-agent AI system designed to cross-verify the authenticity of court evidence (comparing timestamps, audio-video synchronization, and cross-modal consistency).
+* **Feedback & Constraints:** High difficulty in obtaining authentic, annotated real-world crime dataset sources locally for model training.
+
+### 4. Multi-Agent Security & Boundary Monitoring System (Approved Idea)
+* **Concept:** Developing a multi-agent AI architecture where specialized agents execute primary autonomous tasks, coupled with a **Watchdog / Monitoring Super-Agent**.
+* **Core Functionality:**
+  * **Supervising Agents:** Continuously monitors sub-agents to ensure they operate within defined domain boundaries and security parameters.
+  * **Boundary Violation Detection:** Prevents agents from attempting unauthorized out-of-domain actions or malicious interactions.
+  * **Alert & Action Mechanism:** Flags anomalous sub-agent behavior, logs interaction logs, and revokes access/blocks execution if a violation occurs.
+
+---
+
+## ✅ Supervisor Feedback & Recommendations
+
+1. **Focus on Future-Proof Tech:** The project must address cutting-edge AI dynamics (Multi-Agent Systems, AGI safety, agent drift/governance) rather than traditional web development.
+2. **Data & Feasibility:** Focus on synthetic action/interaction log generation to test agent boundaries and safety protocols efficiently.
+3. **Product Potential:** A security/governance layer for autonomous agents holds strong practical value as an independent product/tool.
+
+---
