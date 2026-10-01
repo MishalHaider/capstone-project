@@ -1,4 +1,4 @@
-# Week 1 Update & Research Journey
+# Meeting # 1 Update & Research Journey
 
 We met our supervisor on September 16, 2026, and shared a few initial directions. First, we pitched an educational cybersecurity game where an AI system is trained using reinforcement learning on defensive security, and users are given tasks to perform offensive operations across different levels. Second, we proposed a "Smart Accessibility & Hand-Free Workspace Assistant for Disabled Professionals" to help individuals facing physical disabilities, paralysis, or temporary injuries who struggle to use standard computers or mobile devices for office work and coding. This system allows them to control their entire computer using eye tracking, facial expressions, and voice commands. Third, we brought up a web scraper concept. 
 
