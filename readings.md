@@ -128,4 +128,3 @@ This research directly validates the core architecture of our Final Year Project
 > *"Security in multi-agent LLM architectures cannot be achieved through prompt engineering alone; it requires explicit structural boundaries, privilege isolation, and real-time execution oversight."* — **Hagag et al. (2026)**
 
 ---
-**Status:** Integrated into Literature Review / FYP Background Research.
