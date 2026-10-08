@@ -75,3 +75,57 @@ Students increasingly ask AI tutors and homework helpers for answers instead of 
 - A **coordinator agent** that decides, per student and moment, whether to give a hint, ask a question, or back off so real learning happens.
 #### References: ####
 Along with our own discussion, we read a number of research papers on these topics and also gathered supporting content using AI tools like Claude, DeepSeek, and Gemini.
+
+---
+---
+# Research Paper Review: Architecture Matters for Multi-Agent Security
+
+**Paper Title:** Architecture Matters for Multi-Agent Security  
+**Authors:** Ben Hagag, William L. Anderson, et al. (2026)  
+**Topic Relevance:** Multi-Agent Governance, AI Safety, Watchdog Interceptor Systems  
+
+---
+
+## 📌 Executive Summary
+This paper demonstrates that security risks in **Multi-Agent Systems (MAS)** are fundamentally different and more complex than in single-agent LLM systems. Traditional content moderation and prompt-filtering mechanisms fail in multi-agent workflows because the attack surface exists within **inter-agent interactions, task delegation patterns, and execution boundaries**, rather than at an individual prompt level.
+
+The authors prove that **System Architecture** (Boundary Separation, Runtime Supervision, Access Control) is the only reliable method to secure multi-agent environments effectively.
+
+---
+
+## 💡 Key Insights & Takeaways
+
+### 1. Single-Prompt Guardrails Fall Short
+* Traditional single-prompt guardrails (such as input toxicity filters) cannot protect multi-agent architectures.
+* Malicious intent rarely resides in a single input; instead, it propagates through normal, benign-looking messages shared across multiple sub-agents.
+
+### 2. Cascading Failures & Privilege Escalation
+* If a single sub-agent is compromised via indirect prompt injection, it can exploit other trusted sub-agents to execute high-privilege actions (Privilege Escalation).
+* Complex multi-step task delegation often leads to **goal drift**, where an agent unknowingly crosses its designated domain boundaries.
+
+### 3. Architecture as the Primary Defense Layer
+* Relying purely on LLM alignment or prompt instructions is insufficient for security guarantees.
+* System-level architectural controls (Guardrails, Sandboxing, Isolation) are required to provide deterministic safety enforcement.
+
+### 4. Need for Runtime Isolation & Strict Boundaries
+* Sub-agents must operate under the Principle of Least Privilege with minimal necessary capabilities.
+* A dedicated **Interceptor / Monitoring Layer** must sit on the inter-agent communication channel to inspect and block unauthorized requests in real time.
+
+---
+
+## 🛠️ Relevance to Our FYP (Multi-Agent Watchdog System)
+
+This research directly validates the core architecture of our Final Year Project:
+
+1. **Watchdog Interceptor Justification:** Confirms that runtime execution oversight must happen at the inter-agent communication layer—the core function of our Watchdog Super-Agent.
+2. **Boundary Enforcement:** Supports isolating sub-agents within domain-specific boundaries to prevent privilege escalation.
+3. **Mitigating Drift & Exploitation:** Proves that real-time action interception and audit logging are necessary to prevent cascading agent compromises.
+
+---
+
+## 📝 Key Citation for FYP Report
+
+> *"Security in multi-agent LLM architectures cannot be achieved through prompt engineering alone; it requires explicit structural boundaries, privilege isolation, and real-time execution oversight."* — **Hagag et al. (2026)**
+
+---
+**Status:** Integrated into Literature Review / FYP Background Research.
