@@ -87,3 +87,110 @@ The primary objective of this meeting was to present and evaluate multiple Final
 3. **Product Potential:** A security/governance layer for autonomous agents holds strong practical value as an independent product/tool.
 
 ---
+# Meeting # 3
+
+Date: October 7, 2026
+
+Subject: The details of the project was discussed with the professor and document was submitted later on.
+
+# Multi-Agent AI Security Incident Response System
+
+> A hybrid security framework combining autonomous AI agents for threat triage with a strict, deterministic code-based Orchestrator and a real-time Watchdog guardrail middleware to prevent unauthorized or malicious agent actions.
+
+---
+
+## 🚀 Project Overview & Problem Statement
+Modern enterprise networks generate massive volumes of security logs that overwhelm traditional Security Operations Center (SOC) analysts. While Autonomous Multi-Agent AI systems can automate log analysis and threat investigation, they suffer from severe vulnerabilities such as indirect prompt injection in logs, lack of runtime safety interception, and hallucinated execution paths. 
+
+This project implements a hybrid architecture featuring:
+* **Autonomous AI Agents** for rapid threat detection, investigation, and response planning.
+* **A Deterministic Orchestrator** (LangGraph) for strict sequential state control.
+* **A Real-Time Watchdog Middleware** to enforce hard-coded safety boundaries, IP limits, and prevent prompt-injection bypasses.
+
+---
+
+## 📊 Feasibility Study
+* **Technical Feasibility:** No custom model training required. Leverages pre-trained LLM APIs combined with deterministic Python control logic and ChromaDB for local semantic vector search.
+* **Time Feasibility:** Structured across a 6–8 month academic Final Year Project (FYP) timeline.
+* **Resource Feasibility:** Uses open-source frameworks, FastAPI, Streamlit, developer APIs (Groq/Gemini), and an isolated Docker lab environment.
+* **Expertise Feasibility:** Developed using standard Python programming, API integration, and software security principles.
+
+---
+
+## 👥 Target Audience
+* **SOC Analysts / Security Operations Teams:** Automated threat triage and incident investigation support.
+* **AI Safety & Security Researchers:** Testing runtime resilience against adversarial inputs and indirect prompt injections.
+* **Academic Evaluation Committee:** University FYP review panels assessing autonomous safety guardrails and system architecture.
+
+---
+
+## 🛠️ System Architecture & Tech Stack
+
+| Component / Module | Model / API Options | Technical Justification |
+| :--- | :--- | :--- |
+| **1. Detection Agent** | Groq API (Llama-3-70b-8192) | Lightning-fast inference and cost-effective parsing of raw security logs. |
+| **2. Investigator Agent** | Gemini API + ChromaDB | Superior reasoning to correlate current alerts with historical vector memory (RAG). |
+| **3. Response Planner** | Groq (with Pydantic Validation) | Enforces strict JSON output formatting (e.g., `BLOCK_IP`) for downstream parsing. |
+| **4. Orchestrator** | LangGraph + SQLite Checkpointing | Ensures a strict linear workflow without unauthorized step jumps and maintains state persistence. |
+| **5. Watchdog Guardrail** | Custom Python Middleware | Absolute determinism checking IP boundaries, schema validity, and data-vs-command segregation. |
+
+---
+
+## 🐳 Isolated Lab Environment (Dockerized)
+To safely test and demonstrate incident response without risking host network security, an isolated battleground lab is established:
+* **The Victim Container:** A lightweight Ubuntu server running Apache/Nginx generating real-time `access.log` data.
+* **The Attacker Container:** A dedicated Kali Linux container used to launch active network attacks (e.g., Nmap scans, brute-force payloads).
+* **Safe Execution Boundary:** Remediation commands are executed exclusively inside the isolated Docker target container.
+
+---
+
+## 🔄 Execution Workflow
+1. **Ingestion:** Real-time lab logs from Docker target containers are fed into the pipeline.
+2. **Detection & Triage:** Detection Agent parses raw logs and flags anomalous security events.
+3. **Investigation & Planning:** Investigator and Response Planner analyze threat context and formulate structured remediation actions.
+4. **Watchdog Interception:** Middleware inspects the action against hardcoded IP boundaries and Pydantic validation filters.
+5. **Enforcement:** 
+   * *Safe Actions:* Automatically executed inside the Docker target.
+   * *High-Risk Actions:* Paused; requires manual Human-in-the-Loop (HITL) approval via the Streamlit dashboard.
+   * *Malicious/Unauthorized:* Blocked, logged, and flashed on the live dashboard.
+
+---
+
+## 🗺️ Project Roadmap
+* **Phase 1 (Baseline Incident Response):** Docker container setup, log generation, and core Detection/Investigator/Planner agent implementation.
+* **Phase 2 (Advanced Multi-Agent Capability):** Multi-agent coordination and task handling in a controlled environment.
+* **Phase 3 (Governance & Watchdog Safety):** Integration of LangGraph state controllers and the hard-coded Watchdog guardrail layer.
+* **Phase 4 (Adversarial Robustness & Red Teaming):** Simulating prompt injection and log poisoning attacks to validate system resilience.
+
+---
+---
+
+Date: October 13, 2026
+
+Update: Proposal was checked by the Project Manager and some minor formatting errors were corrected.
+
+---
+---
+
+# Meeting # 4
+
+Date: October 14, 2026
+
+Subject: Supervisor Feedback & Project Proposal Review
+
+The project proposal document was submitted to the supervisor for review and signature, and the signed copy is expected to be returned tomorrow.
+
+The supervisor directed the team to perform a detailed comparative analysis of all the references included in the proposal and identify the most relevant tools.
+
+The shortlisted tools need to be divided among team members and installed/set up in their respective system environments.
+
+An evaluation of each tool's strengths and weaknesses must be conducted, focusing particularly on identifying functional gaps (what the existing tools cannot do) so our proposed system can cover those missing aspects.
+
+---
+---
+
+Date: October 15, 2026
+
+Update: Proposal was signed by the Supervisor and submitted to the Project Manager.
+
+---
