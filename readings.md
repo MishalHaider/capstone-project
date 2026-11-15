@@ -217,3 +217,71 @@ Our system uses a code-based orchestrator and watchdog around LLM agents (detect
 - The watchdog should check every tool call and its parameters, not just the final answer, because of Thought-Attack (Paper 2).
 - Logs, alerts and retrieved memory should be treated as untrusted input, since an attacker may control their content (Observation-Attack).
 - High-impact actions should still need human approval.
+
+
+
+# Multi-Agent SOC Defense & Watchdog: Literature & Reference Analysis
+
+This document summarizes the 2-week research and comparative literature review conducted for our project: **"Multi-Agent AI Security Incident Response System with Runtime Watchdog & Adversarial Guardrails"**. 
+
+The goal of this research is to evaluate existing benchmarks, guardrails, multi-agent frameworks, and SOC platforms, identifying how they align with or fall short of our goal to build a robust, code-enforced, and auditable SOC defense system.
+
+---
+
+## Reviewed References in the last two weeks
+
+### 1. AgentDojo (Debenedetti et al., NeurIPS 2024)
+* **What it is:** A dynamic, extensible benchmark environment designed to evaluate prompt injection attacks and defenses on tool-using LLM agents.
+* **Relevance:** It tests indirect prompt injection inside tool outputs (emails, files, web pages) across 4 simulated suites (Workspace, Slack, Travel, Banking).
+* **Key Takeaway:** We adopt its **state-based security evaluation approach** (success and security measured from environment state changes rather than an unreliable LLM judge) and its core metrics: **Benign Utility, Utility Under Attack, and targeted Attack Success Rate (ASR) with 95% confidence intervals**.
+* **Our Gap / Difference:** AgentDojo is limited to single agents and does not cover multi-agent SOC log processing, inter-agent communication, memory poisoning, or a deterministic Watchdog executor.
+
+### 2. LlamaFirewall (Chennabasappa et al., Meta Research, 2025)
+* **What it is:** An open-source guardrail framework featuring runtime scanners (Prompt Guard 2, AlignmentCheck, CodeShield, and regex filters) to detect injection, goal drift, and insecure code.
+* **Relevance:** Demonstrates how layered security checks can be applied at different stages of an agentic workflow.
+* **Relevance to Us:** We adapt its concept of placing a **final check before risky actions**, recording false positives/negatives, and monitoring latency.
+* **Our Gap / Difference:** LlamaFirewall is a generic guardrail and not a complete SOC platform. It lacks a SOC pipeline, SIEM log correlation, inter-agent typed message schemas, and deterministic parameter enforcement.
+
+### 3. AG2 Classic Safeguards (v0.14.1)
+* **What it is:** Official policy-based safety orchestration for multi-agent workflows using the `autogen` framework.
+* **Relevance:** Allows developers to attach policies to check interaction channels (agent-agent, user-agent, agent-tool) using regex or LLM guardrails.
+* **Relevance to Us:** We adopt its principle of **separating detection from enforcement** (blocking or masking violations) and emitting structured safety events.
+* **Our Gap / Difference:** AG2 Safeguards are entirely developer-driven policy hooks. They do not provide a built-in SOC platform, log ingestion, threat investigation, or a deterministic action validator.
+
+### 4. Agentic SOC Platform (ASP) (FunnyWolf, 2025–2026)
+* **What it is:** An open-source, production-style AI SOC platform that ingests SIEM/webhook alerts, extracts IOCs, aggregates cases, and uses LLM agents for triage and investigation.
+* **Relevance:** Serves as a direct **architectural reference** for our end-to-end SOC workflow (Alert $\rightarrow$ Ingestion $\rightarrow$ Investigation $\rightarrow$ Case $\rightarrow$ Remediation Playbook).
+* **Our Gap / Difference:** ASP automates SOC operations but lacks explicit defenses against log-substrate prompt injection or malicious inter-agent message tampering. Unlike ASP, our project introduces **typed-only messages, a deterministic LLM-free Watchdog, a separate sandbox executor, and mandatory human approval**.
+
+### 5. Inter-Agent Guard (AgentGuard) (PyPI `inter-agent-guard` v1.2.0, 2026)
+* **What it is:** A security firewall designed specifically for multi-agent systems to inspect messages, verify sender trust via Ed25519 signatures, and enforce capability manifests.
+* **Relevance:** Protects against compromised agents passing malicious instructions (Agent-in-the-Middle).
+* **Relevance to Us:** Informs our design for inter-agent communication boundaries and capability limits.
+* **Our Gap / Difference:** AgentGuard inspects free-text messages using ML classifiers (which add latency and can be bypassed by rephrasing). In contrast, our system enforces **strict typed-only message schemas** where raw logs are never directly passed as instructions, combined with a SOC-parameter-aware Watchdog.
+
+### 6. Torq AI SOC Platform / Socrates (Torq, 2023–2026)
+* **What it is:** A commercial, closed-source enterprise platform using an LLM orchestrator (Socrates) and specialized HyperAgents for Tier-1 SecOps threat resolution.
+* **Relevance:** Validates the industry pattern of splitting SOC roles into specialized agents (triage, investigation, remediation) and restricting agents to pre-approved workflows and human-on-the-loop oversight.
+* **Our Gap / Difference:** Torq is a proprietary product with no published adversarial evaluations. Its orchestrator is an LLM agent, whereas our orchestrator is controlled by **deterministic code**.
+
+### 7. ControlValve (Jha et al., ICLR 2026)
+* **What it is:** A defense framework against control-flow hijacking in multi-agent systems that builds task-specific grammars and checks edge rules.
+* **Relevance:** Highlights that LLM-based alignment checks are brittle and easily evaded, motivating the need for **non-LLM, code-level enforcement**.
+* **Our Gap / Difference:** Focuses on general multi-agent coding/computer-use tasks rather than SOC incident response or log analysis.
+
+### 8. Poisoning the Watchtower (Pandey & Bhujang, 2026)
+* **What it is:** Research studying "log-substrate prompt injection," where unauthenticated remote attackers manipulate log fields (`user_agent`, `payload`, `raw_message`) to trick LLM security analysts into giving false verdicts.
+* **Relevance:** Directly models the exact attack surface we target in our SOC data pipeline (attacker-controlled log text) and provides attack categorizations (S1–S4).
+* **Our Gap / Difference:** Evaluates single LLM analysts using prompt-level defenses rather than a multi-agent pipeline protected by a code-based Watchdog and secure executor.
+
+---
+
+## Comparison Matrix Summary
+
+| Dimension | Our Project (Multi-Agent SOC Defense & Watchdog) | Existing Tools (AgentDojo, LlamaFirewall, AG2, ASP, AgentGuard, Torq) |
+| :--- | :--- | :--- |
+| **Domain** | SOC / Incident Response (Isolated Docker Lab) | Mostly generic agent frameworks or commercial enterprise platforms |
+| **Inter-Agent Communication** | **Strictly typed, schema-checked messages only** (no raw log text passed between agents) | Free-text message passing or standard LLM outputs |
+| **Action Validation** | **Deterministic, LLM-free Watchdog** validates schemas, IP ranges, allowed actions, and rate limits in code | Relies on LLM judges, probabilistic classifiers, or high-level policy definitions |
+| **Execution Safety** | Isolated execution separate from agent logic with mandatory **Human-in-the-Loop approval** for high-risk actions | Mixed; either lacks a sandbox executor or handles remediation via automated workflows/playbooks |
+| **Evaluation Focus** | End-to-end damage limitation, **Memory (ChromaDB) poisoning tests**, and Red-Team ASR comparison (Protected vs. Unprotected) | Fragmented (either pure benchmark without SOC or commercial claims without open adversarial evaluation) |
